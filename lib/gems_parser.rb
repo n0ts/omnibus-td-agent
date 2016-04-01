@@ -8,9 +8,10 @@ class GemsParser
   def initialize
     @target_dir = nil
     @target_files = []
+    @target_custom_files = []
   end
 
-  attr_reader :target_dir, :target_files
+  attr_reader :target_dir, :target_files, :target_custom_files
 
   def parse(file)
     self.instance_eval(file)
@@ -22,5 +23,9 @@ class GemsParser
 
   def download(name, ver)
     @target_files << [name, ver]
+  end
+
+  def github(repo, branch = "master", gem)
+    @target_custom_files << [repo, branch, gem]
   end
 end

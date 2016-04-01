@@ -27,4 +27,17 @@ Dir.chdir(gp.target_dir) {
     }
     index += 1
   }
+
+  gp.target_custom_files.each { |n, v, gem|
+    path = sprintf(file_format, index, n.gsub('/', '-'), v)
+    p path
+    loop {
+      `gem specific_install #{n} #{v}`
+      gem_file = File.join(ENV['GEM_PATH'].split(':')[0], 'cache', "#{gem}.gem")
+      FileUtils.cp(gem_file, path)
+      break if $?.success?
+      sleep 1
+    }
+    index += 1
+  }
 }

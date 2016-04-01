@@ -122,6 +122,7 @@ Vagrant.configure('2') do |config|
         cd #{guest_project_path}
         bundle install --path=/home/#{project_build_user}/.bundler
         bundle exec omnibus build #{project_name}2
+        gem install --no-document specific_install
       OMNIBUS_BUILD
     end # config.vm.define.platform
   end # each_with_index
@@ -187,6 +188,7 @@ Vagrant.configure('2') do |config|
       cd #{guest_project_path}
       bundle install --path=/home/#{project_build_user}/.bundler
       bundle exec omnibus build #{project_name}2
+      gem install --no-document specific_install
     OMNIBUS_BUILD
   end # config.vm.define.platform
 end # Vagrant.configure
